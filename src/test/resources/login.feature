@@ -1,6 +1,7 @@
+@login
 Feature: Login feature
 
-  @login
+  @smoke @positive
   Scenario: Login with valid credentials
     Given I navigate to the homepage
     When I enter valid login credentials
@@ -12,7 +13,7 @@ Feature: Login feature
     When I enter invalid login credentials
     Then I should not be able to login
 
-  @test
+   @noCredentials @smoke
   Scenario: Login with no credentials
     Given I navigate to the homepage
     When I enter no login credentials
