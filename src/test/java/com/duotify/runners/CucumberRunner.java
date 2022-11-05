@@ -7,7 +7,10 @@ import org.junit.runner.RunWith;
 
 
 @CucumberOptions(
-       features = "src/test/resources"
+        tags = "@test",
+        features = "src/test/resources", // path to the feature files
+        glue = "com/duotify/stepDefinitions" // path to the step definition classes
+//        , dryRun = true  // to generate step definition snippet without running the test
 
 )
 @RunWith(Cucumber.class)
