@@ -11,6 +11,7 @@ import org.junit.Assert;
 public class BasicStepDefs {
 
 
+
     @When("I navigate to the homepage")
     public void i_navigate_to_the_homepage() {
         Driver.getDriver().get(ConfigReader.getProperty("url"));
@@ -22,7 +23,7 @@ public class BasicStepDefs {
     @Then("The title should be Welcome to Duotify!")
     public void the_title_should_be_welcome_to_duotify() {
         Assert.assertEquals("Welcome to Duotify!", Driver.getDriver().getTitle());
-        Driver.quitDriver();
+
     }
 
 
@@ -38,7 +39,7 @@ public class BasicStepDefs {
     @Then("I should see sign up button")
     public void i_should_see_sign_up_button() {
         Assert.assertTrue(new HomePage().signUpButton.isDisplayed());
-        Driver.quitDriver();
+
     }
 
 

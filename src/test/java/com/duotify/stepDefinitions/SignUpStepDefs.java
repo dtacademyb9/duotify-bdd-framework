@@ -39,7 +39,7 @@ public class SignUpStepDefs {
     public void i_should_be_able_to_see_the_same_full_name_that_i_signed_up_with() {
 
         Assert.assertEquals(first + " " +last, new WelcomePage().firstAndLast.getText());
-        Driver.quitDriver();
+
     }
 
 
@@ -79,6 +79,7 @@ public class SignUpStepDefs {
         homePage.password2.sendKeys("");
         homePage.signUpButton.click();
     }
+
 
 
 }

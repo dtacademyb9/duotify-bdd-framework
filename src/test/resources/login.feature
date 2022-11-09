@@ -7,7 +7,7 @@ Feature: Login feature
     When I enter valid login credentials
     Then I should be able to login and land on Welcome page
 
-
+  @smoke
   Scenario: Login with invalid credentials
     Given I navigate to the homepage
     When I enter invalid login credentials
@@ -18,3 +18,15 @@ Feature: Login feature
     Given I navigate to the homepage
     When I enter no login credentials
     Then I should not be able to login
+
+  @smoke
+  Scenario: Login with valid credentials parametrized
+    Given I navigate to the homepage
+    When I enter login credentials as "duotechb10" and "tester"
+    Then I should be able to login and land on Welcome page
+
+
+  Scenario: Login with valid credentials parametrized 2
+    Given I navigate to the homepage
+    When I enter login credentials as "john.doe" and "tester"
+    Then I should be able to login and land on Welcome page

@@ -18,7 +18,7 @@ public class LoginStepDefs {
     }
     @Then("I should be able to login and land on Welcome page")
     public void i_should_be_able_to_login_and_land_on_welcome_page() {
-        Assert.assertEquals("http://qa-duotify.us-east-2.elasticbeanstalk.com/browse.php?", Driver.getDriver().getCurrentUrl());
+        Assert.assertEquals("http://qa-duotify.us-east-2.elasticbeanstalk.com/browse.ph?", Driver.getDriver().getCurrentUrl());
     }
 
     @When("I enter invalid login credentials")
@@ -32,7 +32,6 @@ public class LoginStepDefs {
     @Then("I should not be able to login")
     public void i_should_not_be_able_to_login() {
         Assert.assertNotEquals("http://qa-duotify.us-east-2.elasticbeanstalk.com/browse.php?", Driver.getDriver().getCurrentUrl());
-        Driver.quitDriver();
     }
 
 
@@ -44,4 +43,12 @@ public class LoginStepDefs {
         homePage.loginButton.click();
     }
 
+
+    @When("I enter login credentials as {string} and {string}")
+    public void iEnterLoginCredentialsAsAnd(String username, String password) {
+        HomePage homePage  = new HomePage();
+        homePage.loginUsername.sendKeys(username);
+        homePage.loginPassword.sendKeys(password);
+        homePage.loginButton.click();
+    }
 }
