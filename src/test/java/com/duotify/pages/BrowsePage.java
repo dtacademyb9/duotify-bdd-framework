@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
 public class BrowsePage {
 
     public BrowsePage(){
@@ -15,6 +17,21 @@ public class BrowsePage {
 
     @FindBy(xpath = "//span[@class='progressTime remaining']")
     public WebElement minsAndSeconds;
+
+
+    @FindBy(xpath = "//div[@class='gridViewInfo']")
+    public List<WebElement> albums;
+
+
+    @FindBy(xpath = "//span[.='Your Music']")
+    public WebElement yourMusicLink;
+
+    @FindBy(xpath = "//span[.='Browse']")
+    public WebElement browseLink;
+
+
+
+
 
     public void clickOnAlbum(String albumName) {
         String xpath = "//div[.='"+albumName+"']";

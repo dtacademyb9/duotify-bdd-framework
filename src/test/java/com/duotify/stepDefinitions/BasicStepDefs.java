@@ -16,6 +16,8 @@ public class BasicStepDefs {
     public void i_navigate_to_the_homepage() {
         Driver.getDriver().get(ConfigReader.getProperty("url"));
     }
+
+
     @Then("The homepage url should be correct")
     public void the_homepage_url_should_be_correct() {
         Assert.assertEquals(ConfigReader.getProperty("url"), Driver.getDriver().getCurrentUrl());

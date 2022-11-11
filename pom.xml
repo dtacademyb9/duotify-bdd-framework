@@ -62,14 +62,6 @@
         </dependency>
 
 
-        <!--        this dependency is added to prevent a command line issue related to lombok-->
-<!--        <dependency>-->
-<!--            <groupId>org.projectlombok</groupId>-->
-<!--            <artifactId>lombok</artifactId>-->
-<!--            <version>1.18.24</version>-->
-<!--            <optional>true</optional>-->
-<!--        </dependency>-->
-
 
 
     </dependencies>
@@ -77,21 +69,50 @@
 
 
     <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.0.0-M7</version>
-                    <configuration>
-                        <includes>
-                            <include>CucumberRunner.java</include>
-                        </includes>
-
-                    </configuration>
-                </plugin>
-            </plugins>
-        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M7</version>
+                <configuration>
+                    <testFailureIgnore>true</testFailureIgnore>
+                    <includes>
+                        <include>**/*CucumberRunner.java</include>
+                        <!--                        <include>**/*FailedScenariosRunner.java</include>-->
+                        <!--                    when running multiple classes, the class name can be passed thru cmd using the placeholder  -->
+                        <!--                        <include>${className}</include>-->
+                    </includes>
+                    <!--                       These 2 options have to added when running tests in parallel -->
+                    <!--                    <parallel>methods</parallel>-->
+                    <!--                    <useUnlimitedThreads>true</useUnlimitedThreads>-->
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>net.masterthought</groupId>
+                <artifactId>maven-cucumber-reporting</artifactId>
+                <version>5.7.4</version>
+                <executions>
+                    <execution>
+                        <id>execution</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <projectName>Duotify</projectName>
+                            <!-- output directory for the generated report -->
+                            <outputDirectory>${project.build.directory}/pretty-report</outputDirectory>
+                            <!-- folder where it looks for json file needed to generate this report -->
+                            <inputDirectory>${project.build.directory}</inputDirectory>
+                            <jsonFiles>
+                                <!-- name of the json file, could also be a pattern -->
+                                <param>**/*.json</param>
+                            </jsonFiles>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
 
 

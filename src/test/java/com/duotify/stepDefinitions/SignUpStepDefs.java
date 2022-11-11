@@ -2,6 +2,7 @@ package com.duotify.stepDefinitions;
 
 import com.duotify.pages.HomePage;
 import com.duotify.pages.WelcomePage;
+import com.duotify.utilities.ConfigReader;
 import com.duotify.utilities.Driver;
 import com.github.javafaker.Faker;
 import io.cucumber.java.en.Then;
@@ -60,6 +61,8 @@ public class SignUpStepDefs {
         homePage.password2.sendKeys("fdsgghgfjdsgjfgafgdsjgfjsdajgfgsdhgfdsjhgcvjhsdjhdvshsdvgsdgjhvsdgjhsdgvjhdgsjhvgsdhjvsgdhjgsdvjhsdgjhvhsdg");
         homePage.signUpButton.click();
     }
+
+
 
 
     @When("I enter no info to sign up")

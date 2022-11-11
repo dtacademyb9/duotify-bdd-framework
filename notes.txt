@@ -1,0 +1,211 @@
+For Cucumber framework we will need the following 3 dependencies:
+cucumber-java, cucumber-core, cucumber-junit
+
+In Cucumber framework:
+
+  - the test scenarios are put in a feature file which are usually are created under resources folder
+
+  - the feature file scenario steps are connected to step definitions through @CucumberOptions glue option in Runner class
+
+      // Cucumber scenario step is matched to step definition method using the text of the scenario step either with Regular Expressions or Cucumber Expressions
+
+  - tags are the main way to control what scenario or feature files to run
+
+  - Background -> the common steps for ALL scenarios of a feature file can be moved to Background steps
+
+  - Hooks -> Step definition methods annotated with @Before and @After that are executed before/after each SCENARIO
+             The annotated methods can be added into any class under Step Definitions folder but usually added into a separate class called Hooks
+
+
+
+  If you need to specify information in a scenario that won't fit on a single line, you can use a DocString. (""" """)
+  When you use a doctring make sure to put each triple quote on its own line.
+  Ex: Scenario: Example scenario for Database
+      When I send the following query
+        """
+           select first_name,last_name,email,address,district,city,country from customer
+           join address
+           on customer.address_id = address.address_id
+           join city
+           on address.city_id  = city.city_id
+           join country
+           on city.country_id = country.country_id;
+         """
+
+      What are some common Cucumber exceptions?
+
+      UndefinedStepException -  when a scenario step does not have matching step definition method
+
+      PendingException - default exception that added to each step definition snippet
+
+      DuplicateStepDefinitionException - happens when there are more than step definitions with the exactly matching text
+
+      AmbiguousStepDefinitionsException - this happens when one step has more than one matching step definitions
+
+                                          "I navigate to the homepage"
+                                          "I navigate to the {word}"
+
+      CucumberException: Could not convert arguments for step [I pass this information] defined at - happens when step definition parameter
+                         type does not match the datatable
+
+
+
+      Reports in Cucumber Framework
+
+      1) Cucumber built-in html report: Cucumber comes with a native html reporting plugin. We need to enable it in @CucumberOptions
+        with "html" plugin:
+
+        plugin = {
+                        "html:target/cucumber-built-in-report/report.html"  // generates a built-in cucumber html report
+                 }
+
+       2) Pretty cucumber report: should be added as a plugin in pom.xml. Requires a json report.
+
+
+      Running tests thru CMD in Cucumber Framework:
+
+      -Add Maven Surefire plugin (latest version)
+      - Configure it by including the name of the class to run:
+
+                         <configuration>
+                              <includes>
+                                  <include>**/*CucumberRunner.java</include>
+                              </includes>
+                          </configuration>
+
+      - run with mvn test
+
+      Running scenarios with specific tags thru cmd:
+
+      mvn verify -D cucumber.filter.tags="@temp"
+      mvn verify -D cucumber.filter.tags="@test and @temp"
+      mvn verify -D cucumber.filter.tags="@test or @temp"
+      mvn verify -D cucumber.filter.tags="@test and not @temp"
+
+    When you run your test through CMD using Maven, tags passed thru CMD will override the tags from CukeRunner class.
+
+
+
+
+
+      Cucumber DataTable - a cucumber structure that enables table-style data to be passed from a SINGLE step of a Cucumber scenario
+                           into the step definition method
+
+        Example:           Given I am on homepage
+                           When I pass this information
+                           | John | Doe | 12/09/1999 | 235-345-1234 | 322-09-6322 | 123 Main St, Vienna VA 22056 |
+
+         The DataTable is added to the cucumber step definition method as a parameter, we simply need to replace it with corresponding
+         Java data structure for automatic transformation. The allowed types are List<E>, List<List<E>>, List<Map<K,V>>,
+          Map<K,V>  Map<K, List<V>> where E,K,V must be a String, Integer, Float, Double, Byte, Short, Long
+
+      When Cucumber converts the DataTable into corresponding Java data structures (List, Map), it creates
+      unmodifiable versions of these data structures.
+
+
+
+
+
+
+
+      In Cucumber framework we can implement data-driven testing natively with Scenario Outline with Examples table.
+
+      The difference between DataTable and Scenario Outline Examples table -> datatable belongs to one step of the scenario, examples table applies to the entire scenario
+
+
+
+      If we have a large a dataset it can also read from an external file such as csv or excel file.
+      To read from excel file we use Apache POI library
+​
+​
+​
+      @RunWith -> Junit annotation that makes the class a runnable class
+      @CucumberOptions -> Cucumber annotation that helps us configure cucumber options to run the tests
+​
+​
+​
+      How to run a specific runner class thru CMD when you have multiple runners?
+      - Maven surefire plugin determines the name of the runner class to run within its <configuration>  and <includes> tag
+​
+                  <plugin>
+                      <groupId>org.apache.maven.plugins</groupId>
+                      <artifactId>maven-surefire-plugin</artifactId>
+                      <version>3.0.0-M5</version>
+                      <configuration>
+​
+                          <testFailureIgnore>true</testFailureIgnore>
+                          <includes>
+                              <include>**/*CucumberRunner2.java</include>-->
+                           </includes>
+                      </configuration>
+                  </plugin>
+​
+      - When you have multiple runners you can use a placeholder in surefire plugin
+          and pass the name of the runner class thru command line with -D switch -> mvn verify -DrunnerClass=**/*CucumberRunner2.java
+​
+                       <plugin>
+                          <groupId>org.apache.maven.plugins</groupId>
+                          <artifactId>maven-surefire-plugin</artifactId>
+                          <version>3.0.0-M5</version>
+                          <configuration>
+​
+                              <testFailureIgnore>true</testFailureIgnore>
+                              <includes>
+​
+                                  <include>${runnerClass}</include>-->
+​
+                              </includes>
+                          </configuration>
+                      </plugin>
+​
+​
+      - How to re-run only the failed scenarios in Cucumber framework?
+​
+        1. Add "rerun:target/failed.txt" to your main runner class which generates a text file with the list of failed scenarios
+        2. Add another runner class where you indicate the above text file's path for features:
+                   features = "@target/failed.txt"
+        3. Run main runner and failed scenarios runner back to back thru Maven Surefire plugin:
+             <plugin>
+                           <groupId>org.apache.maven.plugins</groupId>
+                           <artifactId>maven-surefire-plugin</artifactId>
+                           <version>3.0.0-M5</version>
+                           <configuration>
+​
+                               <testFailureIgnore>true</testFailureIgnore>
+                               <includes>
+                                  <include>**/*CucumberRunner.java</include>-->
+                                   <include>**/*FailedScenariosRunner.java</include>-->
+                               </includes>
+                           </configuration>
+             </plugin>
+​
+​
+         - How to run cross-browser tests in Cucumber framework?
+           - We pass the name of the browser thru command line with -D switch and run the same tests with multiple commands
+           - This can be done through batch file or through Jenkins commands
+           - batch file example:
+                   call mvn verify -Dbrowser=edge
+                   call mvn verify -Dbrowser=chrome
+                   call mvn verify -Dbrowser=headlessChrome
+​
+​
+         We use "mvn verify" in Cucumber framework to run tests so that the pretty report is generated,
+           otherwise you can run the tests as usual with mvn test
+​
+​
+        How to run tests in parallel in Cucumber framework?
+​
+        We can enable parallel test in Cucumber natively with JUnit. But we need to remember that with this option
+        you can run only FEATURES in parallel.
+        If there is a need for running SCENARIOS in parallel, you can incorporate TestNG.
+​
+        Steps to implement running parallel Features in Cucumber with Junit:
+         1.Give the scope of the feature files that you want to run in parallel in your runner class
+              features = "src/test/resources/parallel"
+           Optionally create a separate folder for feature files that you want to run in parallel
+​
+         2.Add these 2 options under the <configuration> tag of Maven Surefire plugin:
+                <parallel>methods</parallel>
+                <useUnlimitedThreads>true</useUnlimitedThreads>
+​
+         3.Run the tests thru command line

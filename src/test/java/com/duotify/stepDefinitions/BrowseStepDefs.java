@@ -2,9 +2,16 @@ package com.duotify.stepDefinitions;
 
 import com.duotify.pages.AlbumInfoPage;
 import com.duotify.pages.BrowsePage;
+import com.duotify.utilities.SeleniumUtils;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 public class BrowseStepDefs {
     @And("The song duration should be {int} minutes {int} seconds")
@@ -30,5 +37,25 @@ public class BrowseStepDefs {
         System.out.println("The price is " + price);
     }
 
+
+
+
+    @Then("I should see the following albums")
+    public void i_should_see_the_following_albums(List<String> expectedList) {
+
+        BrowsePage browsePage = new BrowsePage();
+        List<String> actualList = SeleniumUtils.getElementsText(browsePage.albums);
+
+        Collections.sort(actualList);
+
+//        Collections.sort(expectedList);
+        // Cucumber creates an unmodifiable versions of Lists and Maps when it converts datable to java type.
+
+        List<String> modifiableExpected = new ArrayList<>(expectedList);
+
+        Collections.sort(modifiableExpected);
+
+        Assert.assertEquals(modifiableExpected, actualList);
+    }
 
 }
