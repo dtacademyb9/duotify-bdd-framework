@@ -20,6 +20,16 @@ public class AlbumInfoPage {
     public WebElement minsAndSeconds;
 
 
+    @FindBy(tagName = "h2")
+    public WebElement albumName;
+
+    @FindBy(xpath = "//p[@role='link']")
+    public WebElement artistName;
+
+    @FindBy(xpath = "//p[contains( text(), 'songs' )]")
+    public WebElement songCount;
+
+
 
     @FindBy(xpath = "//select[@class='item playlist']")
     public WebElement selectMenu;

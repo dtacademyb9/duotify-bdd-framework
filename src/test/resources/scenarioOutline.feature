@@ -1,6 +1,6 @@
 Feature: Scenario Outline demo
 
-  @outline
+
   Scenario Outline: Demo 1
     Given  I navigate to "<page>"
     Then I click on "<productName>"

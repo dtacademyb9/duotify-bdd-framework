@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
 
 
 @CucumberOptions(
-        tags = "@outline",
+        tags = "@albumInfo",
                               //"@smoke and @noCredentials" -> scenarios tagged with both @smoke and @noCredentials
                               //"@smoke or @noCredentials" -> scenarios tagged with either @smoke or @noCredentials
                             //"not @login" -> scenarios tagged with either @smoke or @noCredentials
@@ -23,7 +23,7 @@ import org.junit.runner.RunWith;
                 "html:target/cucumber-built-in-report/report.html",  // generates a built-in cucumber html report
                 "json:target/jsonReport.json"
         }
-        , dryRun = true  // to generate step definition snippets without running the test
+//        , dryRun = true  // to generate step definition snippets without running the test
 
 
 )

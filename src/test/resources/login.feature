@@ -30,3 +30,16 @@ Feature: Login feature
     Given I navigate to the homepage
     When I enter login credentials as "john.doe" and "tester"
     Then I should be able to login and land on Welcome page
+
+
+
+  Scenario Outline: Login with valid credentials from examples tables
+    Given I navigate to the homepage
+    When I enter login credentials as "<username>" and "<password>"
+    Then I should be able to login and land on Welcome page
+
+    Examples:
+      | username   | password      |
+      | duotechb9  | tester        |
+      | john.doe   | tester        |
+      | donald.duck | donaldduck123 |

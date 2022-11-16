@@ -6,6 +6,7 @@ import com.duotify.utilities.SeleniumUtils;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 
 import java.util.ArrayList;
@@ -57,6 +58,33 @@ public class BrowseStepDefs {
         Collections.sort(modifiableExpected);
 
         Assert.assertEquals(modifiableExpected, actualList);
+    }
+
+
+
+    @Then("The album name should be {string}, the artist name should be {string}, the song count count should be {int}")
+    public void the_album_name_should_be_the_artist_name_should_be_the_song_count_count_should_be(String albumName, String artist, Integer count) {
+
+
+         AlbumInfoPage albumInfoPage = new AlbumInfoPage();
+
+         // JUnit hard assertions
+//         Assert.assertEquals(albumName, albumInfoPage.albumName.getText()+"dsvdvsj");
+//         Assert.assertEquals(artist, albumInfoPage.artistName.getText().substring(3));
+//         Assert.assertEquals(count, Integer.valueOf(albumInfoPage.songCount.getText().substring(0,1)));
+
+         // Soft assertions in Junit based cucumber framework can be done through a third party library AssertJ
+
+        SoftAssertions softlyAssert = new SoftAssertions();
+
+        softlyAssert.assertThat(albumInfoPage.albumName.getText()).isEqualTo(albumName);
+        softlyAssert.assertThat(albumInfoPage.artistName.getText().substring(3)).isEqualTo(artist);
+        softlyAssert.assertThat(Integer.valueOf(albumInfoPage.songCount.getText().substring(0,1))).isEqualTo(count);
+
+        softlyAssert.assertAll();
+
+
+
     }
 
 }
