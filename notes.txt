@@ -105,18 +105,33 @@ In Cucumber framework:
 
 
 
-
-
-
-
       In Cucumber framework we can implement data-driven testing natively with Scenario Outline with Examples table.
+
+      In Scenario Outline the data in placeholders (<>) will be replaced with real data from the Examples tables during the run. Example:
+
+      Scenario Outline: Demo 1
+          Given  I navigate to "<PAGE>"
+          Then I click on "<PRODUCT NAME>"
+          Then The price should be <PRICE>
+
+          Examples:
+            | PAGE        | PRODUCT NAME  | PRICE  |     // For examples table, the header row is a must since header row names will be used as placeholder names
+            | homePage    | iphone 12     | 699    |
+            | productPage | apple TV      | 299    |
+            | productPage | samsung watch | 329    |
+            | homepage    | PS 5          | 899    |
+
+
 
       The difference between DataTable and Scenario Outline Examples table -> datatable belongs to one step of the scenario, examples table applies to the entire scenario
 
 
-
       If we have a large a dataset it can also read from an external file such as csv or excel file.
       To read from excel file we use Apache POI library
+
+
+
+
 
       @RunWith -> Junit annotation that makes the class a runnable class
       @CucumberOptions -> Cucumber annotation that helps us configure cucumber options to run the tests

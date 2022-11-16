@@ -87,6 +87,7 @@
                     <testFailureIgnore>true</testFailureIgnore>
                     <includes>
                         <include>**/*CucumberRunner.java</include>
+                        <include>**/*FailedScenarioRunner.java</include>
                         <!--                        <include>**/*FailedScenariosRunner.java</include>-->
                         <!--                    when running multiple classes, the class name can be passed thru cmd using the placeholder  -->
                         <!--                        <include>${className}</include>-->
