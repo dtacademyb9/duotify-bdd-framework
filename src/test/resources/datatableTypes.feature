@@ -33,7 +33,7 @@ Feature: Datatable types
 
 
 
-  @datatable
+#  @datatable
   Scenario:Datatable demo 4
     Given I navigate to the homepage
     When I enter valid login credentials

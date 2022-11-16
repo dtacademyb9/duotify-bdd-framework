@@ -9,6 +9,10 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
 public class SignUpStepDefs {
 
     String first;
@@ -81,6 +85,29 @@ public class SignUpStepDefs {
         homePage.password.sendKeys("");
         homePage.password2.sendKeys("");
         homePage.signUpButton.click();
+    }
+
+
+
+    @When("I enter the following info to sign up")
+    public void i_enter_the_following_info_to_sign_up( List<Map<String, String>> dataTable) {
+
+        Map<String, String> map = dataTable.get(0);
+
+
+        HomePage homePage = new HomePage();
+        int rand = new Random().nextInt(1000);
+        homePage.username.sendKeys(map.get("username") + rand);
+        first = map.get("first");
+        last = map.get("last");
+        homePage.firstName.sendKeys(map.get("first"));
+        homePage.lastName.sendKeys(map.get("last"));
+        homePage.email.sendKeys(map.get("email") + rand);
+        homePage.email2.sendKeys(map.get("email") + rand);
+        homePage.password.sendKeys(map.get("password"));
+        homePage.password2.sendKeys(map.get("password"));
+        homePage.signUpButton.click();
+
     }
 
 

@@ -24,4 +24,12 @@ Feature: Sign Up feature
     When I enter no info to sign up
     Then I should not be able to login
 
+  @datatable
+  Scenario: Sign up with datatable info
+    When I enter the following info to sign up
+      | username    | first  | last | email                | password      |
+      | donald.duck | Donald | Duck | donaldduck@gmail.com | donaldduck123 |
+    Then I should be able to login and land on Welcome page
+    And  I should be able to see the same full name that I signed up with
+
 

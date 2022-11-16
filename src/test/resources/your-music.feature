@@ -10,6 +10,7 @@ Feature: My Playlists
       | Artist           | Album     | Song      |
       | Nicky Jam        | Fenix     | El Amante |
       | Enrique Iglesias | Escape    | Hero      |
+      | Enrique Iglesias | Escape    | Maybe     |
       | Maya Jane Coles  | Werk      | Whirls    |
       | Disclosure       | Ultimatum | Ultimatum |
     Then My playlist should contain the same songs

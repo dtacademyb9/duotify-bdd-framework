@@ -43,6 +43,7 @@ public class BrowseStepDefs {
     @Then("I should see the following albums")
     public void i_should_see_the_following_albums(List<String> expectedList) {
 
+
         BrowsePage browsePage = new BrowsePage();
         List<String> actualList = SeleniumUtils.getElementsText(browsePage.albums);
 

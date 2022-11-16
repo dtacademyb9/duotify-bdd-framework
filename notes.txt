@@ -95,8 +95,9 @@ In Cucumber framework:
                            When I pass this information
                            | John | Doe | 12/09/1999 | 235-345-1234 | 322-09-6322 | 123 Main St, Vienna VA 22056 |
 
-         The DataTable is added to the cucumber step definition method as a parameter, we simply need to replace it with corresponding
-         Java data structure for automatic transformation. The allowed types are List<E>, List<List<E>>, List<Map<K,V>>,
+         The DataTable is added to the cucumber step definition method as a parameter when a snippet is generated.
+         We simply need to replace it with corresponding Java data structure for automatic transformation.
+         The allowed types are List<E>, List<List<E>>, List<Map<K,V>>,
           Map<K,V>  Map<K, List<V>> where E,K,V must be a String, Integer, Float, Double, Byte, Short, Long
 
       When Cucumber converts the DataTable into corresponding Java data structures (List, Map), it creates
