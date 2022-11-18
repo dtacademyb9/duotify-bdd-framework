@@ -1,5 +1,6 @@
 package com.duotify.stepDefinitions;
 
+import com.duotify.utilities.DBUtils;
 import com.duotify.utilities.Driver;
 import io.cucumber.java.*;
 import org.openqa.selenium.OutputType;
@@ -34,6 +35,7 @@ public class Hooks {
 
         Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         Driver.getDriver().manage().window().maximize();
+        DBUtils.createConnection();
 
     }
 
@@ -57,6 +59,7 @@ public class Hooks {
         }
 
         Driver.quitDriver();
+        DBUtils.close();
     }
 
 
