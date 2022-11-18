@@ -8,6 +8,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.safari.SafariDriver;
 
 public class Driver {
 
@@ -39,6 +40,10 @@ public class Driver {
                 case "edge":
                     WebDriverManager.edgedriver().setup();
                     drivers.set(new EdgeDriver());
+                    break;
+                case "safari":
+                    WebDriverManager.safaridriver().setup();
+                    drivers.set(new SafariDriver());
                     break;
                 case "chromeHeadless":
                     WebDriverManager.chromedriver().setup();

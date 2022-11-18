@@ -87,14 +87,15 @@
                     <testFailureIgnore>true</testFailureIgnore>
                     <includes>
                         <include>**/*CucumberRunner.java</include>
-                        <include>**/*FailedScenarioRunner.java</include>
-                        <!--                        <include>**/*FailedScenariosRunner.java</include>-->
+<!--                        <include>**/*FailedScenarioRunner.java</include>-->
+                                           <!--                         To run tests in parallel-->
+<!--                                                <include>**/*ParallelFeatureRunner.java</include>-->
                         <!--                    when running multiple classes, the class name can be passed thru cmd using the placeholder  -->
                         <!--                        <include>${className}</include>-->
                     </includes>
                     <!--                       These 2 options have to added when running tests in parallel -->
-                    <!--                    <parallel>methods</parallel>-->
-                    <!--                    <useUnlimitedThreads>true</useUnlimitedThreads>-->
+                                        <parallel>methods</parallel>
+                                        <useUnlimitedThreads>true</useUnlimitedThreads>
                 </configuration>
             </plugin>
             <plugin>

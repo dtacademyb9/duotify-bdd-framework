@@ -2,6 +2,7 @@ package com.duotify.stepDefinitions;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 
 import java.util.List;
 import java.util.Map;
@@ -75,6 +76,18 @@ public class DatatableStepDefs {
     @Then("The price should be {int}")
     public void the_price_should_be(Integer int1) {
         System.out.println("The price is " + int1);
+    }
+
+
+    @When("I send the following query")
+    public void i_send_the_following_query(String docString) {
+
+        System.out.println(docString);
+
+    }
+    @When("I send the following json body")
+    public void i_send_the_following_json_body(String docString) {
+        System.out.println(docString);
     }
 
 }

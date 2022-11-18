@@ -207,7 +207,8 @@ In Cucumber framework:
         you can run only FEATURES in parallel.
         If there is a need for running SCENARIOS in parallel, you can incorporate TestNG.
 
-        Steps to implement running parallel Features in Cucumber with Junit:
+        Steps to implement running parallel Features in Cucumber with Junit (Use a separate runner class if possible):
+
          1.Give the scope of the feature files that you want to run in parallel in your runner class
               features = "src/test/resources/parallel"
            Optionally create a separate folder for feature files that you want to run in parallel
@@ -216,4 +217,50 @@ In Cucumber framework:
                 <parallel>methods</parallel>
                 <useUnlimitedThreads>true</useUnlimitedThreads>
 
-         3.Run the tests thru command line
+         3. Adjust the Driver class to support thread safe WebDriver using ThreadLocal class.
+
+         4.Run the tests thru command line
+
+
+         Cucumber Framework:
+
+         Dependencies:
+
+         Java
+         Maven
+         Selenium
+         Junit
+         Webdrivermanager
+         AssertJ
+         Faker
+
+         Plugins:
+         Surefire plugin
+         maven-cucumber-reporting(pretty report)
+
+         Test types:
+
+         UI,DB, API Testing
+         Crossbrowser, Headless, Parallel Testing
+         Re-Run of Failed Scenarios
+         End-to-End Tests
+         Data-Driven Tests
+
+         Architecture/Design Patterns:
+
+         Page Object Model
+         Page Factory
+         Singleton WebDriver
+         Utility Classes
+         Property files to store global environment variables
+         Support for command line run of the tests
+
+         Reports:
+         Built in basic cucumber html report
+         Enhanced Graphical cucumber html report (pretty)
+
+
+
+
+
+
