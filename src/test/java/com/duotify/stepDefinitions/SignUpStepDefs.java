@@ -96,14 +96,14 @@ public class SignUpStepDefs {
 
 
         HomePage homePage = new HomePage();
-        int rand = new Random().nextInt(1000);
-        homePage.username.sendKeys(map.get("username") + rand);
+
+        homePage.username.sendKeys(map.get("username") );
         first = map.get("first");
         last = map.get("last");
         homePage.firstName.sendKeys(map.get("first"));
         homePage.lastName.sendKeys(map.get("last"));
-        homePage.email.sendKeys(map.get("email") + rand);
-        homePage.email2.sendKeys(map.get("email") + rand);
+        homePage.email.sendKeys(map.get("email") );
+        homePage.email2.sendKeys(map.get("email") );
         homePage.password.sendKeys(map.get("password"));
         homePage.password2.sendKeys(map.get("password"));
         homePage.signUpButton.click();

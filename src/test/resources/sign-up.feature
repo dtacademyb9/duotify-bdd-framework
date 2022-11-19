@@ -13,7 +13,7 @@ Feature: Sign Up feature
     Then I should be able to login and land on Welcome page
     And  I should be able to see the same full name that I signed up with
 
- @db
+
   Scenario: Sign up with invalid info
     When I enter invalid random info to sign up
     Then I should not be able to login
