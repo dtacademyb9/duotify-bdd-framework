@@ -90,7 +90,7 @@ public class SignUpStepDefs {
 
 
     @When("I enter the following info to sign up")
-    public void i_enter_the_following_info_to_sign_up( List<Map<String, String>> dataTable) {
+    public void i_enter_the_following_info_to_sign_up( List<Map<String, String>> dataTable) throws InterruptedException {
 
         Map<String, String> map = dataTable.get(0);
 
@@ -107,6 +107,8 @@ public class SignUpStepDefs {
         homePage.password.sendKeys(map.get("password"));
         homePage.password2.sendKeys(map.get("password"));
         homePage.signUpButton.click();
+
+        Thread.sleep(2000);
 
     }
 

@@ -1,6 +1,8 @@
 package com.duotify.stepDefinitions;
 
+import com.duotify.pages.BrowsePage;
 import com.duotify.pages.HomePage;
+import com.duotify.pages.UserDetailsPage;
 import com.duotify.utilities.ConfigReader;
 import com.duotify.utilities.Driver;
 import io.cucumber.java.en.Given;
@@ -11,6 +13,21 @@ import org.junit.Assert;
 public class BasicStepDefs {
 
 
+    @When("I update the user email to {string}")
+    public void i_update_the_user_email_to(String email) {
+
+        new BrowsePage().userInfoLink.click();
+        new BrowsePage().userDetailsButton.click();
+
+        UserDetailsPage userDetailsPage = new UserDetailsPage();
+        userDetailsPage.emailField.clear();
+        userDetailsPage.emailField.sendKeys(email);
+        userDetailsPage.saveButton.click();
+
+        Assert.assertTrue(userDetailsPage.successMessage.isDisplayed());
+
+
+    }
 
     @When("I navigate to the homepage")
     public void i_navigate_to_the_homepage() {

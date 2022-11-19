@@ -94,10 +94,10 @@
                 <configuration>
                     <testFailureIgnore>true</testFailureIgnore>
                     <includes>
-                        <include>**/*CucumberRunner.java</include>
+<!--                        <include>**/*CucumberRunner.java</include>-->
 <!--                        <include>**/*FailedScenarioRunner.java</include>-->
                                            <!--                         To run tests in parallel-->
-<!--                                                <include>**/*ParallelFeatureRunner.java</include>-->
+                                                <include>**/*ParallelFeatureRunner.java</include>
                         <!--                    when running multiple classes, the class name can be passed thru cmd using the placeholder  -->
                         <!--                        <include>${className}</include>-->
                     </includes>

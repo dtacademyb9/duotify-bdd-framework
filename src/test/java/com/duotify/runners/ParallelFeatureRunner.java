@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
 
 
-        features = "src/test/resources",
+        features = "src/test/resources/parallelFeatures",
         glue = "com/duotify/stepDefinitions",
         stepNotifications = true,
         plugin = {

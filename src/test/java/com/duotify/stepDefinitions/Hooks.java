@@ -30,7 +30,7 @@ public class Hooks {
 //        System.out.println("After each step");
 //    }
 
-    @Before
+    @Before ("not @db_only")
     public void setupScenario(){
 
         Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
@@ -39,18 +39,18 @@ public class Hooks {
 
     }
 
-//    @Before ("@db")
-//    public void setupDb(){
-//        System.out.println("Create a connection to db");
-//    }
+    @Before ("@db_only")
+    public void setupDb(){
+        DBUtils.createConnection();
+    }
 //
-//    @After ("@db")
-//    public void tearDb(){
-//        System.out.println("Close connection to db");
-//    }
+    @After ("@db_only")
+    public void tearDb(){
+        DBUtils.close();
+    }
 
 
-    @After
+    @After ("not @db_only")
     public void tearDownScenario(Scenario scenario){
 
         if(scenario.isFailed()) {

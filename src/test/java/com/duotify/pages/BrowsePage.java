@@ -5,10 +5,20 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.w3c.dom.html.HTMLInputElement;
 
 import java.util.List;
 
 public class BrowsePage {
+
+
+
+
+
+    @FindBy(xpath = "//button[.='USER DETAILS']")
+    public WebElement userDetailsButton;
+    @FindBy(id = "nameFirstAndLast")
+    public WebElement userInfoLink;
 
     public BrowsePage(){
         PageFactory.initElements(Driver.getDriver(), this);

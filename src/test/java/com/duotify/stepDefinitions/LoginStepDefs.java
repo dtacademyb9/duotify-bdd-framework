@@ -2,10 +2,13 @@ package com.duotify.stepDefinitions;
 
 import com.duotify.pages.HomePage;
 import com.duotify.utilities.ConfigReader;
+import com.duotify.utilities.DBUtils;
 import com.duotify.utilities.Driver;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+
+import java.sql.SQLException;
 
 public class LoginStepDefs {
 
@@ -17,8 +20,9 @@ public class LoginStepDefs {
         homePage.loginButton.click();
     }
     @Then("I should be able to login and land on Welcome page")
-    public void i_should_be_able_to_login_and_land_on_welcome_page() {
+    public void i_should_be_able_to_login_and_land_on_welcome_page() throws SQLException {
         Assert.assertEquals("http://qa-duotify.us-east-2.elasticbeanstalk.com/browse.php?", Driver.getDriver().getCurrentUrl());
+//        DBUtils.executeUpdate("DELETE from users where username='tom.cruise'");
     }
 
     @When("I enter invalid login credentials")
