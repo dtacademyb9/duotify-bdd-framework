@@ -1,7 +1,7 @@
 Feature: Rest Assured code BDD demo
 
 
-
+ @api
   Scenario: Get Specific user details
 
     Given the base URI is initialized and header is "Accept" "application/json"
