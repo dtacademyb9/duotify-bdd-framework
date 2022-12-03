@@ -1,16 +1,12 @@
 package com.duotify.apiDemo;
 
 
-import io.restassured.RestAssured;
-import org.hamcrest.Matchers;
-import org.junit.Assert;
 import org.junit.Test;
 
 import static io.restassured.RestAssured.*;
-import static io.restassured.matcher.RestAssuredMatchers.*;
 import static org.hamcrest.Matchers.*;
 
-public class RestAssuredDemo {
+public class RestAssuredDemoTDD {
 
 
 
@@ -35,14 +31,6 @@ public class RestAssuredDemo {
         then().log().all().
                 assertThat().
                 statusCode(equalTo(200));
-
-
-
-
-
-
-
-
 
     }
 

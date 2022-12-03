@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
 
 
 @CucumberOptions(
-        tags = "@db_only",
+        tags = "@api",
                               //"@smoke and @noCredentials" -> scenarios tagged with both @smoke and @noCredentials
                               //"@smoke or @noCredentials" -> scenarios tagged with either @smoke or @noCredentials
                             //"not @login" -> scenarios tagged with either @smoke or @noCredentials
