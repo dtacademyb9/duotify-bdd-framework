@@ -71,4 +71,19 @@ public class VideoGame {
         public void setReleaseDate(String releaseDate) {
                 this.releaseDate = releaseDate;
         }
+
+
+        @Override
+        public String toString() {
+                return "VideoGame{" +
+                        "name='" + name + '\'' +
+                        ", rating='" + rating + '\'' +
+                        ", reviewScore=" + reviewScore +
+                        ", id=" + id +
+                        ", category='" + category + '\'' +
+                        ", releaseDate='" + releaseDate + '\'' +
+                        '}';
+        }
+
+
 }

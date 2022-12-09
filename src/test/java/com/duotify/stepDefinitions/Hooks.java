@@ -57,6 +57,7 @@ public class Hooks {
             byte[] screenshotFile = ((TakesScreenshot) Driver.getDriver()).getScreenshotAs(OutputType.BYTES);
             scenario.attach(screenshotFile, "image/png", "screenshotOfFailure");
 
+
         }
 
         Driver.quitDriver();

@@ -1,13 +1,21 @@
 package com.duotify.apiDemo;
 
+import com.duotify.apiDemo.pojos.Place;
+import com.duotify.apiDemo.pojos.VideoGame;
 import io.restassured.common.mapper.TypeRef;
+import io.restassured.path.json.JsonPath;
+import org.apache.commons.io.FileUtils;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.SQLOutput;
 import java.util.*;
 
-import static io.restassured.RestAssured.baseURI;
-import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
 
@@ -147,6 +155,119 @@ public class DeserializationDemo {
 
 
     }
+
+
+    @Test
+    public void deserializeAsPOJO(){
+
+      VideoGame videoGame =   given().
+                header("Accept", "application/json").
+                pathParam("videoGameId", 6).
+                when().log().all().
+                get("/videogames/{videoGameId}").
+                then().log().all().
+                statusCode(200).extract().as(VideoGame.class);// deserialize as a VideoGame object
+
+        System.out.println(videoGame);
+
+        Assert.assertEquals("Doom", videoGame.getName());
+        Assert.assertEquals("Mature", videoGame.getRating());
+
+    }
+
+
+    @Test
+    public void deserializeAsPOJO2(){
+
+        baseURI = "https://maps.googleapis.com";
+        basePath = "/maps/api/place";
+
+        Place place = given().
+                queryParam("input", "Duotech Academy").
+                queryParam("inputtype", "textquery").
+                queryParam("key", "AIzaSyDdNmHK2RgQVbpksSzAFI6A2byAcdm_5l8").
+                queryParam("fields", "formatted_address,name,rating").
+
+                when().log().all().
+                get("/findplacefromtext/json").
+                then().log().all().
+                statusCode(200).extract().as(Place.class);
+
+
+          Assert.assertEquals("2735 Hartland Rd Suite 302, Falls Church, VA 22043, United States",
+                              place.getCandidates().get(0).getFormatted_address());
+
+        Assert.assertEquals("OK",
+                place.getStatus());
+
+
+
+    }
+
+
+
+    @Test
+    public void deserializeAsListOfPOJOs() {
+
+//
+
+
+     List<VideoGame> videoGameList =     given().
+                header("Accept", "application/json").
+
+                when().log().all().
+                get("/videogames").
+                then().log().all().
+                statusCode(200).extract().as(new TypeRef<List<VideoGame>>() {
+                });
+
+
+        for (VideoGame videoGame : videoGameList) {
+            System.out.println(videoGame.getName());
+        }
+
+
+
+
+
+
+
+
+    }
+
+    @Test
+    public void deserializeAsFile() throws IOException {
+
+//
+
+
+         InputStream response =    given().
+                header("Accept", "application/json").
+
+                when().log().all().
+                get("/videogames").
+                then().log().all().
+                statusCode(200).extract().asInputStream(); // extracts the response into inputstream obj
+
+
+         // Copy the inputstream content to a json file
+        FileUtils.copyInputStreamToFile(response, new File("src/test/java/com/duotify/apiDemo/jsonFiles/response.json"));
+
+
+
+
+
+
+
+
+
+
+
+    }
+
+
+
+
 
 
 }
