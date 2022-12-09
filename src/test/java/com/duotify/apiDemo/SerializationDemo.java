@@ -1,10 +1,10 @@
 package com.duotify.apiDemo;
 
-import io.restassured.mapper.ObjectMapperType;
+import com.duotify.apiDemo.pojos.VideoGame;
+import com.duotify.apiDemo.pojos.VideoGameGenerated;
 import org.junit.Test;
 
 import java.io.File;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
@@ -84,7 +84,7 @@ public class SerializationDemo {
                         "reviewScore", 100,
                         "category", "Adventure",
                         "rating", "General"
-                         )).  // relative path
+                         )).
 
                 when().log().all().
                 post("/videogames").
@@ -107,6 +107,33 @@ public class SerializationDemo {
                 header("Content-Type", "application/json").
 //                body(videoGame, ObjectMapperType.GSON).  // explicitly specify the Serializer library
                 body(videoGame).
+
+                when().log().all().
+                post("/videogames").
+
+                then().log().all().
+                statusCode(200).
+                body("status", is("Record Added Successfully")).
+                header("Content-Length", "39");
+
+    }
+
+    @Test
+    public void POJOSerializationGeneratedPOJO(){
+
+
+        VideoGameGenerated videoGameGenerated = new VideoGameGenerated(1000+ new Random().nextInt(100000),
+                "Half - Life Alyx",
+                "2022-08-05",
+                 23,
+                "FPS",
+                 "General"
+                 );
+        given().
+                header("Accept", "application/json").
+                header("Content-Type", "application/json").
+//                body(videoGame, ObjectMapperType.GSON).  // explicitly specify the Serializer library
+        body(videoGameGenerated).
 
                 when().log().all().
                 post("/videogames").

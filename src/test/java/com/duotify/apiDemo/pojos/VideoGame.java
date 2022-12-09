@@ -1,4 +1,4 @@
-package com.duotify.apiDemo;
+package com.duotify.apiDemo.pojos;
 
 public class VideoGame {
 
