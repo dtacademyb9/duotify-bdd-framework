@@ -19,7 +19,7 @@ Feature: Login feature
     When I enter no login credentials
     Then I should not be able to login
 
-  @smoke
+
   Scenario: Login with valid credentials parametrized
     Given I navigate to the homepage
     When I enter login credentials as "duotechb10" and "tester"
